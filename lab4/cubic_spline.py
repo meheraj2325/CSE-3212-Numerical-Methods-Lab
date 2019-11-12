@@ -33,7 +33,7 @@ def print_mat(mat):
 def calculate_D(f,h):
     D = np.zeros(len(h)-2)
     for i in range(len(h)-2):
-        D[i] = 6 * ( ((f[i+1] - f[i]) / h[i+2]) - ((f[i] - f[i-1]) / h[i+1]) )
+        D[i] = 6 * ( ((f[i+2] - f[i+1]) / h[i+2]) - ((f[i+1] - f[i]) / h[i+1]) )
     return D
 
 def gauss(a,b):
@@ -121,6 +121,8 @@ print(T)
 for i in range(1,len(x)):
     func = lambda Z: ( (T[i-1]/(6*h[i])) * (((h[i] ** 2) * (Z - x[i])) - ((Z - x[i])**3)) ) + ( (T[i]/(6*h[i])) * (((Z - x[i-1])**3) - ((h[i] ** 2) * (Z - x[i-1]))) ) + ( (1/h[i]) * ( (f[i] * (Z - x[i-1])) - (f[i-1] * (Z - x[i])) ) )
     U = np.linspace(x[i-1],x[i])
+    if(i==1): plt.scatter(x[i-1], f[i-1])
+    plt.scatter(x[i], f[i])
     plt.plot(U,func(U))
 
 plt.show()
